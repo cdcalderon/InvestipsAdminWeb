@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { InvestipsChartComponent } from './investips-chart/investips-chart.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { TvChartContainerComponent } from './tv-chart-container/tv-chart-container.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { TvChartContainerComponent } from './tv-chart-container/tv-chart-contain
     TvChartContainerComponent,
     TopNavComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
