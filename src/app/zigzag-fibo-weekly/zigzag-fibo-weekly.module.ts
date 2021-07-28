@@ -5,9 +5,14 @@ import { ZigzagFiboWeeklyRoutingModule } from './zigzag-fibo-weekly-routing.modu
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ZigzagFiboWeeklyDetailsComponent } from './zigzag-fibo-weekly-details/zigzag-fibo-weekly-details.component';
+import { ZigzagSignalListComponent } from './zigzag-signal-list/zigzag-signal-list.component';
 
 @NgModule({
-  declarations: [ZigzagFiboWeeklyComponent, ZigzagFiboWeeklyDetailsComponent],
+  declarations: [
+    ZigzagFiboWeeklyComponent,
+    ZigzagFiboWeeklyDetailsComponent,
+    ZigzagSignalListComponent,
+  ],
   imports: [
     ZigzagFiboWeeklyRoutingModule,
     CommonModule,
