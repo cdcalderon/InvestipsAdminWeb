@@ -28,9 +28,9 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
   private _symbol: ChartingLibraryWidgetOptions['symbol'] = 'AAPL';
   private _interval: ChartingLibraryWidgetOptions['interval'] = 'D';
   // BEWARE: no trailing slash is expected in feed URL
-  private _datafeedUrl = 'https://demo_feed.tradingview.com';
+  //private _datafeedUrl = 'https://demo_feed.tradingview.com';
   // private _datafeedUrl = environment.stockMarketQuotesWithIndicatorsApiBaseUrl + '/api/udf';
-  //private _datafeedUrl = environment.udfApiBaseUrl + '/api/udf';
+  private _datafeedUrl = environment.udfApiBaseUrl + '/api/udf';
   private _libraryPath: ChartingLibraryWidgetOptions['library_path'] =
     '/assets/charting_library/';
   private _chartsStorageUrl: ChartingLibraryWidgetOptions['charts_storage_url'] =

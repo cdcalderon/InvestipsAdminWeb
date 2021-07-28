@@ -5,12 +5,23 @@
     <div class="night-theme">
       <div fxLayout="row" style="height: calc(100vh - 200px)" ngxSplit="row">
         <div fxFlex="30%" ngxSplitArea class="c1r1">
-          <div class="c1r1_header">Column #1 - Row #1</div>
-          <ul>
-            <li>2 Columns: 30% + 70%</li>
-            <li>2nd Column: 2 rows</li>
-            <li>2nd Column: 50% + 50%</li>
-          </ul>
+          <div class="c1r1_header">
+            Column #1 - Row #1 {{ selectedSignal?.symbol }}
+            {{ selectedSignal?.activationPrice }}
+          </div>
+          <mat-selection-list #shoes>
+            <mat-list-item
+              role="listitem"
+              *ngFor="let signal of zigZagFibSignalsUp$ | async; let i = index"
+            >
+              <mat-radio-button
+                [value]="signal"
+                (change)="selectedSignal = $event.value"
+              >
+                {{ signal.symbol }}
+              </mat-radio-button>
+            </mat-list-item>
+          </mat-selection-list>
         </div>
         <div class="handle handle-row" ngxSplitHandle>
           <i class="material-icons">&#xE25D;</i>
@@ -26,7 +37,9 @@
             <div fxFlex="50%" ngxSplitArea class="c2r1_body">
               <div class="c2r1_header">Column #2 - Row #1</div>
               <h1>Layout Dashboard</h1>
-              <app-tv-chart-container></app-tv-chart-container>
+              <app-investips-chart [selectedZigZagSignal]="selectedSignal">
+              </app-investips-chart>
+              <!-- <app-tv-chart-container></app-tv-chart-container> -->
             </div>
             <div class="handle handle-column" ngxSplitHandle>
               <i class="material-icons">&#xE25D;</i>

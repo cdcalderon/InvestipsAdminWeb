@@ -17,6 +17,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -38,6 +40,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatGridListModule,
+    MatListModule,
   ],
 })
 export class MaterialModule {}
