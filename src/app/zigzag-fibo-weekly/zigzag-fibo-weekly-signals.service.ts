@@ -14,7 +14,7 @@ export class ZigzagFiboWeeklySignalsService {
 
   constructor(private _http: HttpClient) {}
 
-  getZigZagFibSignalByDateRange(
+  getWeeklyZigZagFibPremiumSignalByDateRange(
     from: string,
     to: string
   ): Observable<IZigZagFiboSignal[]> {
@@ -26,6 +26,19 @@ export class ZigzagFiboWeeklySignalsService {
       map((response) => {
         return response as IZigZagFiboSignal[];
       }),
+      tap((data) => console.log('All Signals: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  getWeeklyZigZagFibPremiumSignalById(
+    signalId: number | string
+  ): Observable<IZigZagFiboSignal> {
+    // let params = new HttpParams();
+    // params = params.append('signalid', id);
+
+    const apiRequestUrl = `${this._stockQuotesAndIndicatorssUrlBase}/api/weeklyzigzagfibpremiumsignal/${signalId}`;
+    return this._http.get<IZigZagFiboSignal>(apiRequestUrl).pipe(
       tap((data) => console.log('All Signals: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

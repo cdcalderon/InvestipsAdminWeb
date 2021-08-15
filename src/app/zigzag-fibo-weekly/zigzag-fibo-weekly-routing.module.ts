@@ -19,7 +19,7 @@ const routes: Routes = [
         component: ZigzagSignalListComponent,
       },
       {
-        path: 'details',
+        path: 'details/:signal-id',
         component: ZigzagFiboWeeklyDetailsComponent,
       },
     ],

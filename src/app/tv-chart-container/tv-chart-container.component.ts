@@ -388,7 +388,7 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   clearChart() {
-    if (this._tvWidget && this._tvWidget.chart()) {
+    if (this._tvWidget && this._tvWidget.chart) {
       this._tvWidget.chart().removeAllShapes();
       this.studyIds.forEach((id) => {
         this._tvWidget.activeChart().removeEntity(id);

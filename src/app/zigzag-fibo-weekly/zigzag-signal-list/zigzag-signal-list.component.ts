@@ -18,7 +18,7 @@ export class ZigzagSignalListComponent implements OnInit {
 
   ngOnInit(): void {
     this.zigZagFibSignalsUp$ = this.zigzagSignalService
-      .getZigZagFibSignalByDateRange(null, null)
+      .getWeeklyZigZagFibPremiumSignalByDateRange(null, null)
       .pipe(
         filter((signals) => signals != null),
         map((signals) =>
