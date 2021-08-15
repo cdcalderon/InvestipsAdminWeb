@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { IZigZagFiboSignal } from 'src/app/shared/models/zigzag-fibo-signal';
 import { ZigzagFiboWeeklySignalsService } from '../zigzag-fibo-weekly-signals.service';

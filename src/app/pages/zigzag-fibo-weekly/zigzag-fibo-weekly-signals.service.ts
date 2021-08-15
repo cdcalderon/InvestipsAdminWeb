@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { IZigZagFiboSignal } from 'src/app/shared/models/zigzag-fibo-signal';
 import { environment } from 'src/environments/environment';
-import { IZigZagFiboSignal } from '../shared/models/zigzag-fibo-signal';
 
 @Injectable({
   providedIn: 'root',
