@@ -87,3 +87,16 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+:host .mat-table {
+  width: 100%;
+}
+
+.init-pub {
+  color: #cecece;
+  padding-left: 15px;
+}
+
+.published {
+  color: rgb(3, 182, 3) !important;
+}

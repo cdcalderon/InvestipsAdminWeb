@@ -19,6 +19,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -42,6 +45,9 @@ import { MatListModule } from '@angular/material/list';
     MatTooltipModule,
     MatGridListModule,
     MatListModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
   ],
 })
 export class MaterialModule {}

@@ -19,4 +19,9 @@ export interface IZigZagFiboSignal {
   zigzagType: string;
   support?: number;
   resistence?: number;
+  selected?: boolean;
+  highlighted?: boolean;
+  hovered?: boolean;
+  signalType: string;
+  isPublished: boolean;
 }

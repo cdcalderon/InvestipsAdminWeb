@@ -1,1 +1,25 @@
 <p>no-page-found works!</p>
+
+<button (click)="executeAction('enerbanklanding')">
+  Execute "enerbanklanding" action
+</button>
+<button (click)="executeAction('prequalification')">
+  Execute "prequalification" action
+</button>
+
+<h3 *ngIf="recentToken">Most recent test token</h3>
+<!-- <pre *ngIf="recentToken">{{ formatToken(recentToken) }}</pre> -->
+<pre *ngIf="recentToken">{{ recentToken }}</pre>
+
+<h3 *ngIf="recentError" class="error">Most recent error</h3>
+<pre *ngIf="recentError" class="error">{{
+  recentError.error || "Most recent execution resulted in error"
+}}</pre>
+
+<h3>reCAPTCHA execution log</h3>
+<pre *ngIf="executionLog.length === 0">(empty)</pre>
+<ol *ngIf="executionLog.length > 0">
+  <li *ngFor="let entry of executionLog">
+    Action: <code>{{ entry.action }}</code>
+  </li>
+</ol>
