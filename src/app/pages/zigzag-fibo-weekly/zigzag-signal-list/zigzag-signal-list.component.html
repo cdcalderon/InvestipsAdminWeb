@@ -30,7 +30,7 @@
                 <mat-checkbox
                   (click)="$event.stopPropagation()"
                   (change)="$event ? selection.toggle(row) : null"
-                  [checked]="selection.isSelected(row)"
+                  [checked]="row.isPublished"
                 >
                 </mat-checkbox>
               </mat-cell>
@@ -177,3 +177,5 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+ks
