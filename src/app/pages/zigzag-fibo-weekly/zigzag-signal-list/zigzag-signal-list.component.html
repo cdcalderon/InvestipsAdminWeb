@@ -1,16 +1,21 @@
 <mat-card class="card-demo">
-  <mat-card-title> Carlos Es chingon </mat-card-title>
-  <mat-card-subtitle>Using ngxSplit with Flex-Layout:</mat-card-subtitle>
+  <mat-card-title> Carlos Calderon</mat-card-title>
+  <mat-card-subtitle
+    >The Trade Setups and Time-Based Algorithms Used by Top
+    Traders</mat-card-subtitle
+  >
   <mat-card-content>
     <div class="night-theme">
       <div fxLayout="row" style="height: calc(100vh - 92px)" ngxSplit="row">
         <div fxFlex="30%" ngxSplitArea class="c1r1">
-          <div class="c1r1_header">
-            Column #1 - Row #1 {{ selectedSignal?.symbol }}
+          <div *ngIf="selectedSignal; else selectsignal" class="c1r1_header">
+            Signal:
+            {{ selectedSignal?.symbol }}
             {{ selection.selected }}
             {{ selectedSignal?.activationPrice }}
-            <button (click)="saveSelection()">save</button>
+            <!-- <button (click)="saveSelection()">save</button> -->
           </div>
+          <ng-template #selectsignal>Select signal</ng-template>
           <mat-spinner
             *ngIf="loading"
             style="position: fixed; top: 50%; left: 50%"
@@ -83,64 +88,10 @@
           </mat-table>
           <mat-paginator [pageSize]="25" [pageSizeOptions]="[25, 35, 50, 100]">
           </mat-paginator>
-          <!-- <mat-selection-list #shoes>
-            <mat-list-item
-              role="listitem"
-              *ngFor="let signal of zigZagFibSignalsUp$ | async; let i = index"
-            >
-              <mat-radio-button
-                [value]="signal"
-                (change)="selectedSignal = $event.value"
-              >
-                {{ signal.  <table mat-table [dataSource]="dataSource">
-
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef> username </th>
-      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> phone </th>
-      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="website">
-      <th mat-header-cell *matHeaderCellDef> website </th>
-      <td mat-cell *matCellDef="let element"> {{element.website}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> status </th>
-      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-  </table> }}
-              </mat-radio-button>
-              <span>{{ signal.zigzagType }}</span>
-            </mat-list-item>
-          </mat-selection-list> -->
         </div>
-        <div class="handle handle-row" ngxSplitHandle>
+        <!-- <div class="handle handle-row" ngxSplitHandle>
           <i class="material-icons">&#xE25D;</i>
-        </div>
+        </div> -->
         <div
           fxFlex.xs="70%"
           fxFlex.gt-md="70%"
@@ -154,23 +105,15 @@
         >
           <div fxLayout="column" fxFlexFill ngxSplit="column">
             <div fxFlex="100%" ngxSplitArea class="c2r1_body">
-              <div class="c2r1_header">Column #2 - Row #1</div>
-              <h1>Layout Dashboard</h1>
-              <app-investips-chart [selectedZigZagSignal]="selectedSignal">
+              <div class="c2r1_header">Chart</div>
+              <!-- <h1></h1> -->
+              <app-investips-chart
+                class="chart"
+                [selectedZigZagSignal]="selectedSignal"
+              >
               </app-investips-chart>
               <!-- <app-tv-chart-container></app-tv-chart-container> -->
             </div>
-            <!-- <div class="handle handle-column" ngxSplitHandle>
-              <i class="material-icons">&#xE25D;</i>
-            </div>
-            <div fxFlex="50%" ngxSplitArea class="c2r2">
-              <div class="c2r2_header">Column #2 - Row #2</div>
-              <ul>
-                <li>List Item #1</li>
-                <li>List Item #2</li>
-                <li>List Item #3</li>
-              </ul>
-            </div> -->
           </div>
         </div>
       </div>

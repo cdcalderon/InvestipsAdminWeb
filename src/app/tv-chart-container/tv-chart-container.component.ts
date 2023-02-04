@@ -135,6 +135,7 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
         .symbol()
         .split(':')
         .pop();
+
       if (
         changes.selectedFutureUpSignal.currentValue.symbol === currentSymbol
       ) {
@@ -284,7 +285,11 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
       locale: getLanguageFromURL() || 'en',
       disabled_features: ['use_localstorage_for_settings'],
       //enabled_features: ['study_templates'],
-      enabled_features: ['move_logo_to_main_pane', 'study_templates'],
+      enabled_features: [
+        'move_logo_to_main_pane',
+        'study_templates',
+        'study_dialog_search_control',
+      ],
       charts_storage_url: this._chartsStorageUrl,
       charts_storage_api_version: this._chartsStorageApiVersion,
       client_id: this._clientId,
@@ -295,6 +300,85 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
       studies_overrides: {
         'MA Cross.short:plot.color': '#6B3798',
         'MA Cross.long:plot.color': '#708957',
+      },
+      custom_indicators_getter: function (PineJS) {
+        return Promise.resolve([
+          {
+            name: 'Equity',
+            metainfo: {
+              _metainfoVersion: 51,
+              id: 'Equity@tv-basicstudies-1',
+              description: 'Equity',
+              shortDescription: 'Equity',
+              is_hidden_study: true,
+              is_price_study: true,
+              isCustomIndicator: true,
+              format: {
+                type: 'price',
+                // Precision is set to one digit, e.g. 777.7
+                precision: 1,
+              },
+
+              plots: [{ id: 'plot_0', type: 'line' }],
+              defaults: {
+                styles: {
+                  plot_0: {
+                    linestyle: 0,
+                    visible: true,
+
+                    // Make the line thinner
+                    linewidth: 1,
+
+                    // Plot type is Line
+                    plottype: 2,
+
+                    // Show price line
+                    trackPrice: true,
+
+                    // Set the plotted line color to dark red
+                    color: '#880000',
+                  },
+                },
+
+                inputs: {},
+              },
+              styles: {
+                plot_0: {
+                  // Output name will be displayed in the Style window
+                  title: 'Equity value',
+                  histogramBase: 0,
+                },
+              },
+              inputs: [],
+            },
+
+            constructor: function () {
+              this.init = function (context, inputCallback) {
+                this._context = context;
+                this._input = inputCallback;
+
+                this._context['carlosprop'] = 'chingon';
+                var symbol = 'AMZN';
+                this._context.new_sym(
+                  symbol,
+                  PineJS.Std.period(this._context)
+                  //PineJS.Std.period(this._context)
+                );
+              };
+
+              this.main = function (context, inputCallback) {
+                this._context = context;
+                console.log(this._context['carlosprop'], 'fff');
+                this._input = inputCallback;
+
+                this._context.select_sym(1);
+
+                var v = PineJS.Std.close(this._context);
+                return [v];
+              };
+            },
+          },
+        ]);
       },
     };
 
@@ -314,9 +398,9 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
 
       // this.createFlag(1576022400, 240);
 
-      tvWidget.chart().createStudy('Moving Average', false, true, [30], {
-        'plot.color.0': '#042f66',
-      });
+      //tvWidget.chart().createStudy('Equity', false, true);
+
+      tvWidget.chart().createStudy('Moving Average', false, true);
 
       tvWidget.headerReady().then(() => {
         const button = tvWidget.createButton();
@@ -333,6 +417,8 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
         );
         button.innerHTML = 'Check API';
       });
+
+      console.log(JSON.stringify(tvWidget.getStudiesList()));
     });
 
     // tvWidget.onChartReady(() => {

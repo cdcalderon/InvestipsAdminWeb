@@ -44,7 +44,7 @@
 }
 
 .c1r1 {
-  background: #3949ab;
+  background: #4e578f;
   padding: 10px;
 }
 
@@ -61,12 +61,12 @@
 }
 
 .c2r1_body {
-  background: #009688;
+  background: #4e578f;
   padding: 10px;
 }
 
 .c2r1_header {
-  background: #00695d;
+  background: #2c3c7a;
 }
 
 .c2r2 {
@@ -90,6 +90,8 @@
 
 :host .mat-table {
   width: 100%;
+  position: relative;
+  top: 20px;
 }
 
 .init-pub {
@@ -99,4 +101,9 @@
 
 .published {
   color: rgb(3, 182, 3) !important;
+}
+
+.chart {
+  position: relative;
+  top: 20px;
 }
