@@ -23,7 +23,6 @@ export class InvestipsChartComponent implements OnInit, OnChanges {
 
   @Input()
   set selectedFutureUpSignal(selectedFutureUpSignal: IWeeklyFutureFiboSignal) {
-    console.log(selectedFutureUpSignal?.symbol + ' ' + 'carlos');
     this._selectedFutureUpSignal =
       selectedFutureUpSignal || this._selectedFutureUpSignal;
   }
@@ -34,7 +33,6 @@ export class InvestipsChartComponent implements OnInit, OnChanges {
 
   @Input()
   set selectedZigZagSignal(selectedZigZagSignal: IZigZagFiboSignal) {
-    console.log(selectedZigZagSignal?.symbol + ' ' + 'carlos');
     this._selectedZigZagSignal =
       selectedZigZagSignal || this._selectedZigZagSignal;
   }
@@ -45,7 +43,6 @@ export class InvestipsChartComponent implements OnInit, OnChanges {
 
   @Input()
   set selectedBottomSupportSignal(selectedZigZagSignal: IBottomSupportSignal) {
-    console.log(selectedZigZagSignal?.symbol + ' ' + 'carlos');
     this._selectedBottomSupportSignal =
       selectedZigZagSignal || this._selectedBottomSupportSignal;
   }

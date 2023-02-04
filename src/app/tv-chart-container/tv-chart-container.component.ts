@@ -135,125 +135,13 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
         .symbol()
         .split(':')
         .pop();
-
-      if (
-        changes.selectedFutureUpSignal.currentValue.symbol === currentSymbol
-      ) {
-        this.clearChart();
-        this._tvWidget
-          .activeChart()
-          .setVisibleRange({ from, to }, { percentRightMargin: 20 })
-          .then(() => {
-            console.log('New visible range is applied');
-            //this.addFiboSignal(this.selectedFutureUpSignal);
-            this.addABBLowHighFibSignalStudy(this.selectedFutureUpSignal);
-          });
-      } else {
-        this.clearChart();
-        this._tvWidget
-          .activeChart()
-          .setSymbol(this.selectedFutureUpSignal.symbol, () => {
-            this._tvWidget
-              .activeChart()
-              .setVisibleRange({ from, to }, { percentRightMargin: 20 })
-              .then(() => {
-                console.log('New visible range is applied');
-                // this.addFiboSignal(this.selectedFutureUpSignal);
-                this.addABBLowHighFibSignalStudy(this.selectedFutureUpSignal);
-              });
-          });
-      }
-    }
-
-    if (changes && changes.selectedZigZagSignal && this._tvWidget) {
       this.clearChart();
-      console.log(
-        'Changes from tv chart container ' +
-          changes.selectedZigZagSignal.currentValue
-      );
-      const base = this.getUTCUnixDate(
-        this.selectedZigZagSignal.activationDate
-      );
-      const from = this.twoMonthsBeforeUTC(base);
-      const to = this.oneMonthAfterUTC(base);
 
-      const currentSymbol = this._tvWidget
-        .activeChart()
-        .symbol()
-        .split(':')
-        .pop();
-      this.onCreateStudy(this._tvWidget, 'stoch307bull');
-      if (changes.selectedZigZagSignal.currentValue.symbol === currentSymbol) {
-        this._tvWidget
-          .activeChart()
-          .setVisibleRange({ from, to }, { percentRightMargin: 20 })
-          .then(() => {
-            console.log('New visible range is applied');
-            this.addZigZagFiboSignal(this.selectedZigZagSignal);
-          });
-      } else {
-        this._tvWidget
-          .activeChart()
-          .setSymbol(this.selectedZigZagSignal.symbol, () => {
-            this._tvWidget
-              .activeChart()
-              .setVisibleRange({ from, to }, { percentRightMargin: 20 })
-              .then(() => {
-                console.log('New visible range is applied');
-                this.addZigZagFiboSignal(this.selectedZigZagSignal);
-              });
-          });
-      }
+      this.handleFutureUpSignal(changes, currentSymbol, from, to);
     }
 
-    if (changes && changes.selectedBottomSupportSignal && this._tvWidget) {
-      this.clearChart();
-      console.log(
-        'Changes from tv chart container ' +
-          changes.selectedBottomSupportSignal.currentValue
-      );
-      const base = this.getUTCUnixDate(
-        this.selectedBottomSupportSignal.cTimeStampDateTime
-      );
-      const from = this.sixMonthsBeforeUTC(base);
-      const to = this.sixMonthAfterUTC(base);
-
-      const currentSymbol = this._tvWidget
-        .activeChart()
-        .symbol()
-        .split(':')
-        .pop();
-      this.onCreateStudy(this._tvWidget, 'stoch307bull');
-      if (
-        changes.selectedBottomSupportSignal.currentValue.symbol ===
-        currentSymbol
-      ) {
-        this._tvWidget
-          .activeChart()
-          .setVisibleRange({ from, to }, { percentRightMargin: 20 })
-          .then(() => {
-            console.log('New visible range is applied');
-            this.addBottomSupportSignal(this.selectedBottomSupportSignal);
-          });
-      } else {
-        this._tvWidget
-          .activeChart()
-          .setSymbol(this.selectedBottomSupportSignal.symbol, () => {
-            this._tvWidget
-              .activeChart()
-              .setVisibleRange({ from, to }, { percentRightMargin: 20 })
-              .then(() => {
-                console.log('New visible range is applied');
-                this.addBottomSupportSignal(this.selectedBottomSupportSignal);
-              });
-          });
-      }
-    }
-
-    //  console.log(changes.selectedFutureUpSignal.currentValue);
-    // this.doSomething(changes.categoryId.currentValue);
-    // You can also use categoryId.previousValue and
-    // categoryId.firstChange for comparing old and new values
+    this.handleZigZagSignal(changes);
+    this.handleSelectedBottomSupportSignal(changes);
   }
 
   ngOnInit() {
@@ -368,9 +256,7 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
 
               this.main = function (context, inputCallback) {
                 this._context = context;
-                console.log(this._context['carlosprop'], 'fff');
                 this._input = inputCallback;
-
                 this._context.select_sym(1);
 
                 var v = PineJS.Std.close(this._context);
@@ -464,6 +350,122 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
   //         }
   //     );
   // }
+
+  private handleFutureUpSignal(
+    changes: SimpleChanges,
+    currentSymbol,
+    from,
+    to
+  ) {
+    if (changes.selectedFutureUpSignal.currentValue.symbol === currentSymbol) {
+      this._tvWidget
+        .activeChart()
+        .setVisibleRange({ from, to }, { percentRightMargin: 20 })
+        .then(() => {
+          this.addABBLowHighFibSignalStudy(this.selectedFutureUpSignal);
+        });
+    } else {
+      this._tvWidget
+        .activeChart()
+        .setSymbol(this.selectedFutureUpSignal.symbol, () => {
+          this._tvWidget
+            .activeChart()
+            .setVisibleRange({ from, to }, { percentRightMargin: 20 })
+            .then(() => {
+              this.addABBLowHighFibSignalStudy(this.selectedFutureUpSignal);
+            });
+        });
+    }
+  }
+
+  private handleZigZagSignal(changes: SimpleChanges) {
+    if (changes && changes.selectedZigZagSignal && this._tvWidget) {
+      this.clearChart();
+      console.log(
+        'Changes from tv chart container ' +
+          changes.selectedZigZagSignal.currentValue
+      );
+      const base = this.getUTCUnixDate(
+        this.selectedZigZagSignal.activationDate
+      );
+      const from = this.twoMonthsBeforeUTC(base);
+      const to = this.oneMonthAfterUTC(base);
+
+      const currentSymbol = this._tvWidget
+        .activeChart()
+        .symbol()
+        .split(':')
+        .pop();
+      this.onCreateStudy(this._tvWidget, 'stoch307bull');
+      if (changes.selectedZigZagSignal.currentValue.symbol === currentSymbol) {
+        this._tvWidget
+          .activeChart()
+          .setVisibleRange({ from, to }, { percentRightMargin: 20 })
+          .then(() => {
+            console.log('New visible range is applied');
+            this.addZigZagFiboSignal(this.selectedZigZagSignal);
+          });
+      } else {
+        this._tvWidget
+          .activeChart()
+          .setSymbol(this.selectedZigZagSignal.symbol, () => {
+            this._tvWidget
+              .activeChart()
+              .setVisibleRange({ from, to }, { percentRightMargin: 20 })
+              .then(() => {
+                console.log('New visible range is applied');
+                this.addZigZagFiboSignal(this.selectedZigZagSignal);
+              });
+          });
+      }
+    }
+  }
+
+  private handleSelectedBottomSupportSignal(changes: SimpleChanges) {
+    if (changes && changes.selectedBottomSupportSignal && this._tvWidget) {
+      this.clearChart();
+      console.log(
+        'Changes from tv chart container ' +
+          changes.selectedBottomSupportSignal.currentValue
+      );
+      const base = this.getUTCUnixDate(
+        this.selectedBottomSupportSignal.cTimeStampDateTime
+      );
+      const from = this.sixMonthsBeforeUTC(base);
+      const to = this.sixMonthAfterUTC(base);
+
+      const currentSymbol = this._tvWidget
+        .activeChart()
+        .symbol()
+        .split(':')
+        .pop();
+      this.onCreateStudy(this._tvWidget, 'stoch307bull');
+      if (
+        changes.selectedBottomSupportSignal.currentValue.symbol ===
+        currentSymbol
+      ) {
+        this._tvWidget
+          .activeChart()
+          .setVisibleRange({ from, to }, { percentRightMargin: 20 })
+          .then(() => {
+            console.log('New visible range is applied');
+            this.addBottomSupportSignal(this.selectedBottomSupportSignal);
+          });
+      } else {
+        this._tvWidget
+          .activeChart()
+          .setSymbol(this.selectedBottomSupportSignal.symbol, () => {
+            this._tvWidget
+              .activeChart()
+              .setVisibleRange({ from, to }, { percentRightMargin: 20 })
+              .then(() => {
+                console.log('New visible range is applied');
+                this.addBottomSupportSignal(this.selectedBottomSupportSignal);
+              });
+          });
+      }
+    }
+  }
 
   private addFiboSignals() {
     if (this.fiboSignals) {
