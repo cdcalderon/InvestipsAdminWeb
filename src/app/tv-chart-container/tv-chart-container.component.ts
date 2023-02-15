@@ -198,7 +198,7 @@ export class TvChartContainerComponent implements OnInit, OnDestroy, OnChanges {
               id: 'Equity@tv-basicstudies-1',
               description: 'Equity',
               shortDescription: 'Equity',
-              is_hidden_study: true,
+              is_hidden_study: false,
               is_price_study: true,
               isCustomIndicator: true,
               format: {
